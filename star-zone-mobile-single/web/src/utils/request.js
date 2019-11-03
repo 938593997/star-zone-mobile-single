@@ -131,6 +131,10 @@ function proxyRequest(url, options, showError = true) {
   }).catch((e,url) => {
     console.log(e,'errrr')
     const status = e.code;
+      if (status === undefined) {
+        router.push('/login');
+        return;
+      }
       if (status === 401) {
         // @HACK
         /* eslint-disable no-underscore-dangle */

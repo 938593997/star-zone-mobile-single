@@ -363,10 +363,10 @@ class ChooseListPage extends Component {
         <div className={`${styles.service_info} box_shadow`}>
           <div className={`${styles.service_title} border_bottommin`}>
             我的选择
-            <div style={{ float: 'right', marginTop: -8 }}><Button onClick={() => this.showAddChoose()} type="ghost" inline size="small" style={{ marginRight: -10 }}>添加</Button></div>
+            <div style={{ float: 'right', marginTop: -8 }}><Button onClick={() => this.showAddChoose()} type="ghost" inline size="small" style={{ marginRight: 0 }}>添加</Button></div>
           </div>
           {datas && datas[0] ? datas.map((item, key) =>
-          <div key={key} className={styles.amCard}>
+          <div key={key} className={styles.amCard} style={{ padding: '0px 8px' }}>
           <WhiteSpace size="lg" />
           <Card>
             <Card.Header
@@ -376,17 +376,10 @@ class ChooseListPage extends Component {
               extra={<span>{item.name}</span>}
             />
             <Card.Footer
-              // content={
-              //   <div>
-              //     <div style={{ float: 'left', marginLeft: 8 }}><a onClick={() => this.showConfChoose(item)}>配置</a></div>
-              //     <div style={{ float: 'right' }}><a onClick={() => this.showEditChoose(item)}>编辑</a></div>
-              //   </div>
-              // }
-              // extra={<div><a onClick={() => this.delChoose(item)}>删除</a></div>}
               extra={
                 <div style={{ display: 'inline-block'}}>
                   <div style={{ display: 'inline-block' }}><a disabled={item.ext1 ? true : false} onClick={() => this.showConfChoose(item)}>配置</a></div>
-                  <div style={{ display: 'inline-block', padding: '0px 30px' }}><a onClick={() => this.showEditChoose(item)}>编辑</a></div>
+                  <div style={{ display: 'inline-block', padding: '0px 24px' }}><a onClick={() => this.showEditChoose(item)}>编辑</a></div>
                   <div style={{ display: 'inline-block' }}><a onClick={() => this.delChoose(item)}>删除</a></div>
                 </div>
               }

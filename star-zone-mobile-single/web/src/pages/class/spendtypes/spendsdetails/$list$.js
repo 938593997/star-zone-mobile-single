@@ -396,10 +396,10 @@ class SpendDetailListPage extends Component {
         <div className={`${styles.service_info} box_shadow`}>
           <div className={`${styles.service_title} border_bottommin`}>
             {SpendDetailsData ? <a onClick={() => this.onShow('showChars')}>{SpendDetailsData.name}</a> : ''}
-            <div style={{ float: 'right', marginTop: -8 }}><Button onClick={() => this.onShow('isShowAddOrModifyTypePage')} type="ghost" inline size="small" style={{ marginRight: -10 }}>添加</Button></div>
+            <div style={{ float: 'right', marginTop: -8 }}><Button onClick={() => this.onShow('isShowAddOrModifyTypePage')} type="ghost" inline size="small" style={{ marginRight: -0 }}>添加</Button></div>
           </div>
           {datas && datas[0] ? datas.map((item, key) =>
-          <div key={key} className={styles.amCard}>
+          <div key={key} className={styles.amCard} style={{ padding: '0px 8px' }}>
           <WhiteSpace size="lg" />
           <Card>
             <Card.Header

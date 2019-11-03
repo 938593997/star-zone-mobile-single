@@ -388,7 +388,7 @@ class ApproveForLeaveListPage extends Component {
               renderTabBar={renderTabBar}
               onChange={(val) => this.TabsChange(val)}
             >
-              <div>
+              <div style={{ padding: '8px 8px' }}>
                 <div style={{ textAlign: 'right', marginRight: 8 }}>
                   <div style={{ marginBottom: -12, marginTop: 8 }}><Button onClick={() => this.onShow('isShowAddOrModifyTypePage')} type="ghost" inline size="small">添加</Button></div>
                 </div>
@@ -426,7 +426,7 @@ class ApproveForLeaveListPage extends Component {
                 </ReactPullLoad>
               </div>
 
-              <div>
+              <div style={{ padding: '8px 8px' }}>
                 <ReactPullLoad
                   downEnough={100}
                   ref="reactpullload"
@@ -460,7 +460,7 @@ class ApproveForLeaveListPage extends Component {
                 </ReactPullLoad>
               </div>
 
-              <div>
+              <div style={{ padding: '8px 8px' }}>
                 <ReactPullLoad
                   downEnough={100}
                   ref="reactpullload"

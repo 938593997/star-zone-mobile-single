@@ -679,7 +679,7 @@ class SpendTypeListPage extends Component {
         <div className={`${styles.service_info} box_shadow`}>
           <div className={`${styles.service_title} border_bottommin`}>
             <a onClick={() => this.onShow('showChars')}>我的花费</a>
-            <div style={{ float: 'right', marginTop: -8 }}><Button onClick={() => this.onShow('isShowAddOrModifyTypePage')} type="ghost" inline size="small" style={{ marginRight: -10 }}>添加</Button></div>
+            <div style={{ float: 'right', marginTop: -8 }}><Button onClick={() => this.onShow('isShowAddOrModifyTypePage')} type="ghost" inline size="small" style={{ marginRight: 0 }}>添加</Button></div>
           </div>
 
           {/* {datas && datas[0] ? datas.map((item, key) =>
@@ -727,7 +727,7 @@ class SpendTypeListPage extends Component {
             </Card> */}
             {
                 list && list[0] ? list.map((item, key) =>
-                  <div key={key} className={styles.amCard}>
+                  <div key={key} className={styles.amCard} style={{ padding: '0px 8px' }}>
                   <WhiteSpace size="lg" />
                   <Card>
                     <Card.Header
