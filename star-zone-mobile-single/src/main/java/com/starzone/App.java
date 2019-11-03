@@ -1,16 +1,14 @@
 package com.starzone;
 
-import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 
 /**
- * 项目启动类（star-zone-mobile）
+ * 项目启动类（star-zone-mobile-single）
  * @doc 说明
  * @FileName App.java
  * @author qiu_hf
@@ -18,8 +16,7 @@ import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
  * @since 2019年4月13日
  * @history 1.0.0.0 2019年4月13日 上午11:51:52 created by【qiu_hf】
  */
-@EnableDiscoveryClient
-@SpringBootApplication(exclude = {PageHelperAutoConfiguration.class, SecurityAutoConfiguration.class}) // pagehelper-spring-boot-starter这个依赖，提供了自动配置分页插件的功能,这里要排除这个自动配置，用自己在多数据源中配置的分页
+@SpringBootApplication(exclude = {PageHelperAutoConfiguration.class}) // pagehelper-spring-boot-starter这个依赖，提供了自动配置分页插件的功能,这里要排除这个自动配置，用自己在多数据源中配置的分页
 public class App extends SpringBootServletInitializer {
 	
     public static void main( String[] args ){

@@ -55,14 +55,14 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
       </dependency>
       <!-- springcloud依赖 -->
-      <dependency>
+      <!-- <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-ribbon</artifactId>
-		</dependency>
+		</dependency> -->
       <!-- Spring Boot Mybatis 依赖 -->
       <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -181,7 +181,7 @@
             <systemPath>${project.basedir}/src/main/resources/lib/mail.jar</systemPath>
          </dependency>
          
-         <!-- <dependency>
+         <dependency>
             <groupId>axis.jar-star-zone</groupId>
             <artifactId>axis.jar-star-zone</artifactId>
             <version>1.0.0</version>
@@ -222,7 +222,7 @@
             <version>1.0.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/lib/wsdl4j.jar</systemPath>
-         </dependency> -->
+         </dependency>
          <dependency>
             <groupId>jaxrpc.jar-star-zone</groupId>
             <artifactId>jaxrpc.jar-star-zone</artifactId>
@@ -232,7 +232,7 @@
          </dependency>
 
   </dependencies>
-  <dependencyManagement>
+  <!-- <dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -242,7 +242,7 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement>
+	</dependencyManagement> -->
   
   <build>
         <finalName>star-zone-mobile-single</finalName>

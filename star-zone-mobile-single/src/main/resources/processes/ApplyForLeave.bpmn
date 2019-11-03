@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/testm1539766523202" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/testm1539766523202" id="m1539766523202" name="">
+  <process id="ApplyForLeave" isExecutable="true" isClosed="false" processType="None">
+    <startEvent id="_2" name="start"></startEvent>
+    <userTask id="_3" name="提交请假申请" activiti:assignee="${activitiNode.userId}" activiti:candidateUsers="${activitiNode.userId}"></userTask>
+    <userTask id="_5" name="研发组长审批" activiti:candidateGroups="开发组长"></userTask>
+    <userTask id="_7" name="研发主管审批" activiti:candidateGroups="研发主管"></userTask>
+    <endEvent id="_9" name="end"></endEvent>
+    <sequenceFlow id="_10" sourceRef="_2" targetRef="_3"></sequenceFlow>
+    <sequenceFlow id="flow1" name="是" sourceRef="_3" targetRef="_5">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${activitiNode.condition>'0'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow2" name="同意（天数大于等于2）" sourceRef="_5" targetRef="_7">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${activitiNode.condition >= '2'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow3" name="同意" sourceRef="_7" targetRef="_9">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${activitiNode.condition>'0'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow4" name="否" sourceRef="_3" targetRef="_9">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${activitiNode.condition=='0'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow5" name="不同意" sourceRef="_5" targetRef="_3">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${activitiNode.condition=='0'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow6" name="不同意" sourceRef="_7" targetRef="_3">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${activitiNode.condition=='0'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow7" name="同意天数&lt;2" sourceRef="_5" targetRef="_9">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${activitiNode.condition < '2' && activitiNode.condition > '0'}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_ApplyForLeave">
+    <bpmndi:BPMNPlane bpmnElement="ApplyForLeave" id="BPMNPlane_ApplyForLeave">
+      <bpmndi:BPMNShape bpmnElement="_2" id="BPMNShape__2">
+        <omgdc:Bounds height="35.0" width="35.0" x="122.0" y="5.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" id="BPMNShape__3">
+        <omgdc:Bounds height="60.0" width="100.0" x="90.0" y="60.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" id="BPMNShape__5">
+        <omgdc:Bounds height="60.0" width="100.0" x="90.0" y="145.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" id="BPMNShape__7">
+        <omgdc:Bounds height="60.0" width="100.0" x="89.0" y="237.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" id="BPMNShape__9">
+        <omgdc:Bounds height="35.0" width="35.0" x="121.0" y="325.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_10" id="BPMNEdge__10">
+        <omgdi:waypoint x="139.0" y="40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="140.0" y="60.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="140.0" y="120.0"></omgdi:waypoint>
+        <omgdi:waypoint x="140.0" y="145.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="12.0" x="150.0" y="124.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="140.0" y="205.0"></omgdi:waypoint>
+        <omgdi:waypoint x="139.0" y="237.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="140.0" y="205.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="139.0" y="297.0"></omgdi:waypoint>
+        <omgdi:waypoint x="138.0" y="325.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="139.0" y="297.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="190.0" y="90.0"></omgdi:waypoint>
+        <omgdi:waypoint x="242.0" y="90.0"></omgdi:waypoint>
+        <omgdi:waypoint x="264.0" y="90.0"></omgdi:waypoint>
+        <omgdi:waypoint x="264.0" y="268.0"></omgdi:waypoint>
+        <omgdi:waypoint x="264.0" y="342.0"></omgdi:waypoint>
+        <omgdi:waypoint x="156.0" y="342.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="12.0" x="209.0" y="84.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="90.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="89.0" y="174.0"></omgdi:waypoint>
+        <omgdi:waypoint x="20.0" y="174.0"></omgdi:waypoint>
+        <omgdi:waypoint x="20.0" y="90.0"></omgdi:waypoint>
+        <omgdi:waypoint x="90.0" y="90.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="36.0" x="24.0" y="170.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="89.0" y="267.0"></omgdi:waypoint>
+        <omgdi:waypoint x="14.0" y="267.0"></omgdi:waypoint>
+        <omgdi:waypoint x="14.0" y="234.0"></omgdi:waypoint>
+        <omgdi:waypoint x="14.0" y="188.0"></omgdi:waypoint>
+        <omgdi:waypoint x="14.0" y="123.0"></omgdi:waypoint>
+        <omgdi:waypoint x="14.0" y="89.0"></omgdi:waypoint>
+        <omgdi:waypoint x="90.0" y="90.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="36.0" x="24.0" y="261.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="190.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="264.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="264.0" y="278.0"></omgdi:waypoint>
+        <omgdi:waypoint x="264.0" y="342.0"></omgdi:waypoint>
+        <omgdi:waypoint x="156.0" y="342.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="60.0" x="188.0" y="156.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.client.RestTemplate;
 
 import com.github.pagehelper.PageInfo;
 import com.starzone.utils.AppPage;
@@ -35,6 +35,7 @@ import com.starzone.utils.CalculateUtils;
 import com.starzone.utils.JsonResult;
 import com.starzone.utils.RedisUtil;
 import com.starzone.vo.ActivitiNode;
+import com.starzone.flow.FlowUtil;
 import com.starzone.pojo.ApplyForLeave;
 import com.starzone.pojo.SzUser;
 import com.starzone.service.master.ApplyForLeaveService;
@@ -62,7 +63,7 @@ public class ApplyForLeaveController {
 	public ApplyForLeaveService applyForLeaveServiceImpl;
 	
 	@Autowired
-	RestTemplate restTmpl;
+	FlowUtil flowUtil;
 	
 	@Autowired
 	private RedisUtil redisUtil;
@@ -85,7 +86,8 @@ public class ApplyForLeaveController {
 	@ApiImplicitParam(paramType="query", name = "processId", value = "流程实例id", required = true, dataType = "String")
 	public JsonResult<ApplyForLeave> getMyApplyForLeaveDetailByProcessId(String processId){
 		JsonResult<ApplyForLeave> result = new JsonResult<ApplyForLeave>();
-		Map<String, Object> resultMap = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/findHistory?processId=" + processId, Map.class).getBody();
+//		Map<String, Object> resultMap = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/findHistory?processId=" + processId, Map.class).getBody();
+		Map<String, Object> resultMap = flowUtil.findHistory(processId);
 		if (null != resultMap.get("historyList")) {
 			List<HistoricTaskInstance> historyList = (List<HistoricTaskInstance>) resultMap.get("historyList");
 			ApplyForLeave afl = new ApplyForLeave();
@@ -101,14 +103,16 @@ public class ApplyForLeaveController {
 	 * @param processId 流程实例id
 	 * @return 流程跟踪图片
 	 * @author qiu_hf
+	 * @throws Exception 
 	 * @history 2019年9月28日 下午1:13:16 Create by 【qiu_hf】
 	 */
 	@GetMapping("/queryApplyFollow")
 	@ApiOperation(value = "获取流程跟踪图片", notes = "获取流程跟踪图片， 作者：qiu_hf")
 	@ApiImplicitParam(paramType="query", name = "processId", value = "流程实例id", required = true, dataType = "String")
-	public JsonResult<ApplyForLeave> queryApplyFollow(String processId){
+	public JsonResult<ApplyForLeave> queryApplyFollow(String processId) throws Exception{
 		JsonResult<ApplyForLeave> result = new JsonResult<ApplyForLeave>();
-		String imgFollowNginxUrl = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/queryProHighLighted?processId=" + processId, String.class).getBody();
+//		String imgFollowNginxUrl = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/queryProHighLighted?processId=" + processId, String.class).getBody();
+		String imgFollowNginxUrl = flowUtil.queryProHighLighted(processId);
 		ApplyForLeave afl = new ApplyForLeave();
 		afl.setImgFollowNginxUrl(imgFollowNginxUrl);
 		result.setData(afl);
@@ -195,7 +199,8 @@ public class ApplyForLeaveController {
 			String token = request.getHeader("__token__");
 			SzUser user = (SzUser) redisUtil.get(token);
 			// 启动流程
-			String processId = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/start?userId=" + user.getExt3() + "&&bpmnName=" + bpmnName, String.class).getBody();
+//			String processId = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/start?userId=" + user.getExt3() + "&&bpmnName=" + bpmnName, String.class).getBody();
+			String processId = flowUtil.start(user.getExt3(), bpmnName);
 			// 提交流程
 			ActivitiNode activitiNode = new ActivitiNode();
 			activitiNode.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(applyForLeave.getStartDate()));
@@ -204,7 +209,8 @@ public class ApplyForLeaveController {
 			activitiNode.setCondition(String.valueOf(CalculateUtils.differentDays(new SimpleDateFormat("yyyy-MM-dd").parse(applyForLeave.getStartDate()), new SimpleDateFormat("yyyy-MM-dd").parse(applyForLeave.getEndDate()))));
 			activitiNode.setDesc(applyForLeave.getApplyReason());
 			activitiNode.setProcessId(processId);
-			activitiNode = restTmpl.postForEntity("http://star-zone-mobile-common/api/activiti/apply", activitiNode, ActivitiNode.class).getBody();
+//			activitiNode = restTmpl.postForEntity("http://star-zone-mobile-common/api/activiti/apply", activitiNode, ActivitiNode.class).getBody();
+			activitiNode = flowUtil.apply(activitiNode);
 			// 插入业务数据
 			applyForLeave.setProcessId(processId);
 			applyForLeave.setOwner(user.getId());
@@ -252,7 +258,8 @@ public class ApplyForLeaveController {
 //			activitiNode.setUserId(null != applyForLeave.getCondition() && !"0".equals(applyForLeave.getCondition()) ? user.getExt3() : applyForLeave.getUserId()); // 设置审批人
 			activitiNode.setUserId(user.getExt3()); // 设置审批人
 			activitiNode.setAssignee(applyForLeave.getUserId()); // 驳回的时候有用（直接驳回到跟节点）
-			activitiNode = restTmpl.postForEntity("http://star-zone-mobile-common/api/activiti/approve", activitiNode, ActivitiNode.class).getBody();
+//			activitiNode = restTmpl.postForEntity("http://star-zone-mobile-common/api/activiti/approve", activitiNode, ActivitiNode.class).getBody();
+			activitiNode = flowUtil.approve(activitiNode);
 			if (null != activitiNode) {
 				result.setCode(1);
 				result.setMessage("成功");
@@ -390,7 +397,8 @@ public class ApplyForLeaveController {
 				pageInfo = applyForLeaveServiceImpl.getApplyForLeaveBySearch(page);
 				result.setData(pageInfo);
 			} else if (null != applyForLeave.getActivedTitle() && "我的审批".equals(applyForLeave.getActivedTitle())) {
-				Map<String, Object> resultMaps = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/findUserTaskByPage?userId=" + applyForLeave.getUserId() + "&&pageNum=" + pageNum + "&&pageSize=" + pageSize + "&&bpmnName=" + bpmnName + "&&submitNodeName=" + submitNodeName, Map.class).getBody();
+//				Map<String, Object> resultMaps = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/findUserTaskByPage?userId=" + applyForLeave.getUserId() + "&&pageNum=" + pageNum + "&&pageSize=" + pageSize + "&&bpmnName=" + bpmnName + "&&submitNodeName=" + submitNodeName, Map.class).getBody();
+				Map<String, Object> resultMaps = flowUtil.findUserTaskByPage(pageNum, pageSize, applyForLeave.getUserId(), bpmnName, submitNodeName);
 				if (null != resultMaps.get("userTaskPageInfo")) {
 					Object pInfo = (Object) resultMaps.get("userTaskPageInfo");
 					Map classMap = new HashMap();
@@ -400,7 +408,8 @@ public class ApplyForLeaveController {
 					result.setData(pageInfos);
 				}
 			} else if (null != applyForLeave.getActivedTitle() && "审批历史".equals(applyForLeave.getActivedTitle())) {
-				Map<String, Object> resultMaps = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/findUserApprovedTaskByPage?userId=" + applyForLeave.getUserId() + "&&pageNum=" + pageNum + "&&pageSize=" + pageSize + "&&bpmnName=" + bpmnName + "&&submitNodeName=" + submitNodeName, Map.class).getBody();
+//				Map<String, Object> resultMaps = restTmpl.getForEntity("http://star-zone-mobile-common/api/activiti/findUserApprovedTaskByPage?userId=" + applyForLeave.getUserId() + "&&pageNum=" + pageNum + "&&pageSize=" + pageSize + "&&bpmnName=" + bpmnName + "&&submitNodeName=" + submitNodeName, Map.class).getBody();
+				Map<String, Object> resultMaps = flowUtil.findUserApprovedTaskByPage(pageNum, pageSize, applyForLeave.getUserId(), bpmnName, submitNodeName);
 				if (null != resultMaps.get("userApprovedTaskPageInfo")) {
 					Object pInfo = (Object) resultMaps.get("userApprovedTaskPageInfo");
 					Map classMap = new HashMap();
@@ -441,7 +450,8 @@ public class ApplyForLeaveController {
 			activitiNode.setCondition(String.valueOf(CalculateUtils.differentDays(new SimpleDateFormat("yyyy-MM-dd").parse(applyForLeave.getStartDate()), new SimpleDateFormat("yyyy-MM-dd").parse(applyForLeave.getEndDate()))));
 			activitiNode.setDesc(applyForLeave.getApplyReason());
 			activitiNode.setProcessId(applyForLeave.getProcessId());
-			activitiNode = restTmpl.postForEntity("http://star-zone-mobile-common/api/activiti/apply", activitiNode, ActivitiNode.class).getBody();
+//			activitiNode = restTmpl.postForEntity("http://star-zone-mobile-common/api/activiti/apply", activitiNode, ActivitiNode.class).getBody();
+			activitiNode = flowUtil.apply(activitiNode);
 			// 修改业务数据
 			applyForLeave.setApplyDate(String.valueOf(activitiNode.getTotalDay()));
 			int rg = applyForLeaveServiceImpl.updateByProcessId(applyForLeave);

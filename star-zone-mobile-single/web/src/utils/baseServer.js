@@ -1,13 +1,10 @@
-// export const baseUrl = window.location.origin + '/';
-// export const baseUrl = 'http://127.0.0.1:9000/'
-// export const baseUrl = 'http://47.101.187.84:9000/'
 export const baseUrl = process.env.apiUrl
 export let baseUrls = null
 const ENV = process.env.UMI_ENV
 if (ENV  === 'prd' || ENV  === 'test') {
-  baseUrls = 'http://47.101.187.84:9000/'
+  baseUrls = 'http://47.101.187.84:9005/'
 } else if (ENV  === 'dev') {
-  baseUrls = 'http://127.0.0.1:9000/'
+  baseUrls = 'http://127.0.0.1:9005/'
 }
 
 export const setFormData = (obj) => {
