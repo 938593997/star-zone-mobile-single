@@ -1,0 +1,57 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "cross-env UMI_ENV=dev umi dev --port=8001",
+    "build": "cross-env UMI_ENV=prd umi build",
+    "test": "umi test",
+    "build-test": "cross-env UMI_ENV=test umi build",
+    "build-dev": "cross-env UMI_ENV=dev umi build",
+    "build-prd": "cross-env UMI_ENV=prd umi build",
+    "lint": "",
+    "precommit": "lint-staged"
+  },
+  "homepage": ".",
+  "devDependencies": {
+    "antd-pro-server": "^1.0.1",
+    "babel-eslint": "^9.0.0",
+    "cross-env": "^5.2.1",
+    "eslint": "^5.4.0",
+    "eslint-config-umi": "^0.1.5",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "mockjs": "^1.0.1-beta3",
+    "umi": "^2.2.7",
+    "umi-plugin-react": "^1.1.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^2.8.0",
+    "classnames": "^2.2.6",
+    "fastclick": "^1.0.6",
+    "jquery": "^3.4.0",
+    "js-export-excel": "^1.1.2",
+    "lrz": "^4.9.40",
+    "moment": "^2.24.0",
+    "rcolor": "^1.0.1",
+    "react-chartjs-2": "^2.7.6",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-image-process": "^0.1.6",
+    "react-mobile-datepicker": "^4.0.1",
+    "react-motion": "^0.5.2",
+    "react-pullload": "^1.2.0",
+    "react-sticky": "^6.0.3",
+    "react-transition-group": "^2.5.0"
+  }
+}

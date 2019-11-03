@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starzone.dao.master.AskingDao">
+	<resultMap id="BaseResultMap" type="com.starzone.pojo.Asking">
+	<id column="id" jdbcType="VARCHAR" property="id" />
+	<id column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+	<id column="birthday" jdbcType="VARCHAR" property="birthday" />
+	<id column="detail_type" jdbcType="VARCHAR" property="detailType" />
+	<id column="contents" jdbcType="VARCHAR" property="contents" />
+	<id column="ext1" jdbcType="VARCHAR" property="ext1" />
+	<id column="ext2" jdbcType="VARCHAR" property="ext2" />
+	<id column="ext3" jdbcType="VARCHAR" property="ext3" />
+	<id column="ext4" jdbcType="VARCHAR" property="ext4" />
+	<id column="ext5" jdbcType="VARCHAR" property="ext5" />
+	</resultMap>
+	<sql id="BASE_COLUMN_LIST">
+	id, pic_url, birthday, detail_type, contents, ext1, ext2, ext3, ext4, ext5
+	</sql>
+	<!-- 查询 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from asking
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from asking
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<!-- 选择添加 -->
+	<insert id="insertSelective" parameterType="com.starzone.pojo.Asking">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into asking
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="picUrl != null">
+				pic_url,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="detailType != null">
+				detail_type,
+			</if>
+			<if test="contents != null">
+				contents,
+			</if>
+			<if test="ext1 != null">
+				ext1,
+			</if>
+			<if test="ext2 != null">
+				ext2,
+			</if>
+			<if test="ext3 != null">
+				ext3,
+			</if>
+			<if test="ext4 != null">
+				ext4,
+			</if>
+			<if test="ext5 != null">
+				ext5,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="picUrl != null">
+				#{picUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				#{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="detailType != null">
+				#{detailType,jdbcType=VARCHAR},
+			</if>
+			<if test="contents != null">
+				#{contents,jdbcType=VARCHAR},
+			</if>
+			<if test="ext1 != null">
+				#{ext1,jdbcType=VARCHAR},
+			</if>
+			<if test="ext2 != null">
+				#{ext2,jdbcType=VARCHAR},
+			</if>
+			<if test="ext3 != null">
+				#{ext3,jdbcType=VARCHAR},
+			</if>
+			<if test="ext4 != null">
+				#{ext4,jdbcType=VARCHAR},
+			</if>
+			<if test="ext5 != null">
+				#{ext5,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 选择修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.starzone.pojo.Asking">
+		update asking
+		<set>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="picUrl != null">
+				pic_url = #{picUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="detailType != null">
+				detail_type = #{detailType,jdbcType=VARCHAR},
+			</if>
+			<if test="contents != null">
+				contents = #{contents,jdbcType=VARCHAR},
+			</if>
+			<if test="ext1 != null">
+				ext1 = #{ext1,jdbcType=VARCHAR},
+			</if>
+			<if test="ext2 != null">
+				ext2 = #{ext2,jdbcType=VARCHAR},
+			</if>
+			<if test="ext3 != null">
+				ext3 = #{ext3,jdbcType=VARCHAR},
+			</if>
+			<if test="ext4 != null">
+				ext4 = #{ext4,jdbcType=VARCHAR},
+			</if>
+			<if test="ext5 != null">
+				ext5 = #{ext5,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=varchar}
+	</update>
+	<!-- 组合条件查询 -->
+	<select id="queryAskingList" parameterType="com.starzone.pojo.Asking"
+		resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from asking
+		<where>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="picUrl  != null">
+				AND pic_url = #{picUrl ,jdbcType=VARCHAR}
+			</if>
+			<if test="birthday  != null">
+				AND birthday = #{birthday ,jdbcType=VARCHAR}
+			</if>
+			<if test="detailType  != null">
+				AND detail_type = #{detailType ,jdbcType=VARCHAR}
+			</if>
+			<if test="contents  != null">
+				AND contents = #{contents ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext1  != null">
+				AND ext1 = #{ext1 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext2  != null">
+				AND ext2 = #{ext2 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext3  != null">
+				AND ext3 = #{ext3 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext4  != null">
+				AND ext4 = #{ext4 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext5  != null">
+				AND ext5 = #{ext5 ,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+</mapper>

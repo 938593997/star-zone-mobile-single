@@ -1,0 +1,376 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>1.0.0</groupId>
+  <artifactId>star-zone-mobile-single</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>star-zone-mobile-single</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <mybatis-spring-boot>1.2.0</mybatis-spring-boot>
+    <fastjson>1.2.41</fastjson>
+    <druid>1.1.8</druid>
+    <pagehelper>1.2.3</pagehelper>
+    <!-- 代码生成插件 -->
+	<mysql-connector-java.version>5.1.34</mysql-connector-java.version>
+	<slf4j-api.version>1.7.26</slf4j-api.version>
+	<lombok.version>1.18.6</lombok.version>
+	<freemarker.version>2.3.28</freemarker.version>
+	<fastjson>1.2.41</fastjson>
+	
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	<spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
+  </properties>
+  
+   <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.9.RELEASE</version>
+		<relativePath/>
+	</parent>
+	
+  <dependencies>
+      <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+	  </dependency>
+	  <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional> 
+      </dependency>  
+      <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+      <!-- springcloud依赖 -->
+      <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-ribbon</artifactId>
+		</dependency>
+      <!-- Spring Boot Mybatis 依赖 -->
+      <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-spring-boot}</version>
+       </dependency>
+       <!-- MySQL 连接驱动依赖 -->
+       <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version><!--$NO-MVN-MAN-VER$-->
+        </dependency>
+		<!-- tomcat的支持.-->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Druid 数据连接池依赖 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid}</version>
+        </dependency>
+        <!-- redis依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency> 
+        <!--pagehelper分页工具类  -->
+        <dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>${pagehelper}</version>
+		</dependency>
+		<!-- 引入工作流引擎jar包 -->
+      <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter-basic</artifactId>
+            <version>5.22.0</version>
+        </dependency>
+		<!-- 代码生成插件 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${freemarker.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version><!--$NO-MVN-MAN-VER$-->
+			<optional>true</optional>
+		</dependency>
+		<dependency><!-- 模板引擎，用来实现页面跳转 -->
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+        <!-- swagger插件 -->	
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <dependency>
+		    <groupId>net.sourceforge.nekohtml</groupId><!-- 去掉H5标签闭合检查 -->
+		    <artifactId>nekohtml</artifactId>
+		    <version>1.9.22</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		<!--fastjson 相关jar -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson}</version>
+		</dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+        <dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version><!--$NO-MVN-MAN-VER$ 解决加密时报java.lang.NoClassDefFoundError-->
+		</dependency>
+        <!-- 引入本地jar包 -->
+        <dependency>
+            <groupId>simple.java-star-zone</groupId>
+            <artifactId>simple.java-star-zone</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/simple.java.jar</systemPath>
+         </dependency>
+         <dependency>
+            <groupId>mail-tools-star-zone</groupId>
+            <artifactId>mail-tools-star-zone</artifactId>
+            <version>1.4.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/itcast-tools-1.4.jar</systemPath>
+         </dependency>
+         <dependency>
+            <groupId>mail-star-zone</groupId>
+            <artifactId>mail-star-zone</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/mail.jar</systemPath>
+         </dependency>
+         
+         <!-- <dependency>
+            <groupId>axis.jar-star-zone</groupId>
+            <artifactId>axis.jar-star-zone</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/axis.jar</systemPath>
+         </dependency>
+         <dependency>
+            <groupId>commons-discovery-0.2.jar-star-zone</groupId>
+            <artifactId>commons-discovery-0.2.jar-star-zone</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/commons-discovery-0.2.jar</systemPath>
+         </dependency>
+         <dependency>
+            <groupId>commons-logging.jar-star-zone</groupId>
+            <artifactId>commons-logging.jar-star-zone</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/commons-logging.jar</systemPath>
+         </dependency>
+         <dependency>
+            <groupId>jaxrpc.jar-star-zone</groupId>
+            <artifactId>jaxrpc.jar-star-zone</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/jaxrpc.jar</systemPath>
+         </dependency>
+         <dependency>
+            <groupId>saaj.jar-star-zone</groupId>
+            <artifactId>saaj.jar-star-zone</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/saaj.jar</systemPath>
+         </dependency>
+         <dependency>
+            <groupId>wsdl4j.jar-star-zone</groupId>
+            <artifactId>wsdl4j.jar-star-zone</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/wsdl4j.jar</systemPath>
+         </dependency> -->
+         <dependency>
+            <groupId>jaxrpc.jar-star-zone</groupId>
+            <artifactId>jaxrpc.jar-star-zone</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/jaxrpc.jar</systemPath>
+         </dependency>
+
+  </dependencies>
+  <dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+  
+  <build>
+        <finalName>star-zone-mobile-single</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+                    <mainClass>com.starzone.App</mainClass>
+                    <executable>true</executable>
+                    <includeSystemScope>true</includeSystemScope><!-- 将上面指定的本地包打进去 -->
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+		    <!-- https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin -->
+		      <groupId>com.github.eirslett</groupId>
+		      <artifactId>frontend-maven-plugin</artifactId>
+		      <version>1.6</version>
+		      <executions>
+				  <execution>
+				     <id>install node and npm</id>
+				     <goals>
+				       <goal>install-node-and-npm</goal>
+				     </goals>
+				     <configuration>
+				       <nodeVersion>v10.7.0</nodeVersion>
+				       <npmVersion>6.1.0</npmVersion>
+				       <nodeDownloadRoot>http://npm.taobao.org/mirrors/node/</nodeDownloadRoot>
+				       </configuration>
+				   </execution>
+				   <execution>
+				     <id>npm install</id>
+				     <goals>
+				        <goal>npm</goal>
+				     </goals>
+				     <configuration>
+				        <arguments>install</arguments>
+				      </configuration>
+				   </execution>
+				   <execution>
+				     <id>run-script build</id>
+				     <goals>
+				       <goal>npm</goal>
+				     </goals>
+				     <configuration>
+				       <arguments>run build-${profileActive}</arguments>
+				     </configuration>
+				   </execution>
+				 </executions>
+				 <configuration>
+				   <installDirectory>target</installDirectory>
+				   <workingDirectory>web</workingDirectory>
+				 </configuration>
+			 </plugin>
+		</plugins>
+		
+		<resources><!-- 将前端打出的dist下的文件放到src/main/resources/static下 -->
+		  <resource>
+		    <directory>web/dist</directory>
+		    <targetPath>static</targetPath>
+		    <includes>
+		      <include>**/**</include>
+		    </includes>
+		  </resource>
+		  <resource>
+		    <directory>src/main/resources</directory><!-- 将src/main/resources下的资源一并打包 -->
+		    <includes>
+		      <include>**/**</include>
+		    </includes>
+		      <filtering>false</filtering>
+		  </resource>
+		  
+		  <resource>
+            <directory>src/main/resources</directory>
+            <!-- 开启过滤替换功能-->
+            <filtering>true</filtering>
+            <includes>
+                <!-- 项目打包完成的包中只包含当前环境文件 -->
+                <include>application.properties</include>
+                <include>application-${profileActive}.properties</include>
+            </includes>
+          </resource>
+            
+		</resources>
+	</build>
+	
+	<!-- 多环境配置方案 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+            <activation>
+                <!-- 默认情况下使用dev开发配置 如 打包时不包含 -p 参数-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!-- 打包命令package -P test -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <profileActive>test</profileActive>
+            </properties>
+        </profile>
+        <!-- 打包命令package -P prd -->
+        <profile>
+            <id>prd</id>
+            <properties>
+                <profileActive>prd</profileActive>
+            </properties>
+        </profile>
+    </profiles>
+	
+</project>

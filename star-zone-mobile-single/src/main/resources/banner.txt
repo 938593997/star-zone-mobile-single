@@ -1,0 +1,13 @@
+${AnsiColor.BRIGHT_GREEN}
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::SS:::TTTTTTTT::::::A:::::::RRRRRR:::::ZZZZZZZZ::::OOO::::NN::::::N:EEEEEEEEE:
+::SS:::SS::::TT::::::::A:A::::::R:::::R::::::::::Z:::O:::::O::N:N:::::N:E:::::::::
+:SS::::::::::TT:::::::A:::A:::::R::::::R::::::::Z:::O:::::::O:N::N::::N:E:::::::::
+::SS:::::::::TT::::::AAAAAAA::::R::::R:::::::::Z::::O:::::::O:N:::N:::N:EEEEEEEEE:
+:::::SS::::::TT:::::A:::::::A:::RRRRRR::::::::Z:::::O:::::::O:N::::N::N:E:::::::::
+:SS::::SS::::TT::::A:::::::::A::R:::::R::::::Z:::::::O:::::O::N:::::N:N:E:::::::::
+::::SS:::::::TT:::A:::::::::::A:R:::::::RR:ZZZZZZZZ::::OOO::::N::::::NN:EEEEEEEEE:
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+${AnsiColor.BLACK}
+Application Version: ${application.version}${application.formatted-version}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}

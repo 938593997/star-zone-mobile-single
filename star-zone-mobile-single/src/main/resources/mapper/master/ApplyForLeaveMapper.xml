@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starzone.dao.master.ApplyForLeaveDao">
+	<resultMap id="BaseResultMap" type="com.starzone.pojo.ApplyForLeave">
+	<id column="id" jdbcType="VARCHAR" property="id" />
+	<id column="owner" jdbcType="VARCHAR" property="owner" />
+	<id column="user_id" jdbcType="VARCHAR" property="userId" />
+	<id column="apply_date" jdbcType="VARCHAR" property="applyDate" />
+	<id column="start_date" jdbcType="VARCHAR" property="startDate" />
+	<id column="end_date" jdbcType="VARCHAR" property="endDate" />
+	<id column="apply_reason" jdbcType="VARCHAR" property="applyReason" />
+	<id column="description" jdbcType="VARCHAR" property="description" />
+	<id column="process_id" jdbcType="VARCHAR" property="processId" />
+	</resultMap>
+	<sql id="BASE_COLUMN_LIST">
+	id, user_id, owner, apply_date, start_date, end_date, apply_reason, description, process_id
+	</sql>
+	<!-- 查询 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from t_apply_for_leave
+		where id = #{id, jdbcType=VARCHAR}
+	</select>
+	<!-- 通过流程实例id查询 -->
+	<select id="queryApplyInfoByProcessId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from t_apply_for_leave
+		where process_id = #{processId, jdbcType=VARCHAR}
+	</select>
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from t_apply_for_leave
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<!-- 选择添加 -->
+	<insert id="insertSelective" parameterType="com.starzone.pojo.ApplyForLeave">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into t_apply_for_leave
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="owner != null">
+				owner,
+			</if>
+			<if test="applyDate != null">
+				apply_date,
+			</if>
+			<if test="startDate != null">
+				start_date,
+			</if>
+			<if test="endDate != null">
+				end_date,
+			</if>
+			<if test="applyReason != null">
+				apply_reason,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="processId != null">
+				process_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="owner != null">
+				#{owner,jdbcType=VARCHAR},
+			</if>
+			<if test="applyDate != null">
+				#{applyDate,jdbcType=VARCHAR},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=VARCHAR},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=VARCHAR},
+			</if>
+			<if test="applyReason != null">
+				#{applyReason,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="processId != null">
+				#{processId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 选择修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.starzone.pojo.ApplyForLeave">
+		update t_apply_for_leave
+		<set>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="owner != null">
+				owner = #{owner,jdbcType=VARCHAR},
+			</if>
+			<if test="applyDate != null">
+				apply_date = #{applyDate,jdbcType=VARCHAR},
+			</if>
+			<if test="startDate != null">
+				start_date = #{startDate,jdbcType=VARCHAR},
+			</if>
+			<if test="endDate != null">
+				end_date = #{endDate,jdbcType=VARCHAR},
+			</if>
+			<if test="applyReason != null">
+				apply_reason = #{applyReason,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="processId != null">
+				process_id = #{processId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 通过流程实例id 选择修改 -->
+	<update id="updateByProcessId" parameterType="com.starzone.pojo.ApplyForLeave">
+		update t_apply_for_leave
+		<set>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="owner != null">
+				owner = #{owner,jdbcType=VARCHAR},
+			</if>
+			<if test="applyDate != null">
+				apply_date = #{applyDate,jdbcType=VARCHAR},
+			</if>
+			<if test="startDate != null">
+				start_date = #{startDate,jdbcType=VARCHAR},
+			</if>
+			<if test="endDate != null">
+				end_date = #{endDate,jdbcType=VARCHAR},
+			</if>
+			<if test="applyReason != null">
+				apply_reason = #{applyReason,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="processId != null">
+				process_id = #{processId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where process_id = #{processId,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 组合条件查询 -->
+	<select id="queryApplyForLeaveList" parameterType="com.starzone.pojo.ApplyForLeave"
+		resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from t_apply_for_leave
+		<where>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="userId  != null">
+				AND user_id = #{userId ,jdbcType=VARCHAR}
+			</if>
+			<if test="owner  != null">
+				AND owner = #{owner ,jdbcType=VARCHAR}
+			</if>
+			<if test="applyDate  != null">
+				AND apply_date = #{applyDate ,jdbcType=VARCHAR}
+			</if>
+			<if test="startDate  != null">
+				AND start_date = #{startDate ,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate  != null">
+				AND end_date = #{endDate ,jdbcType=VARCHAR}
+			</if>
+			<if test="keyWords  != null">
+				<!-- AND apply_reason = #{applyReason ,jdbcType=VARCHAR} -->
+				AND apply_reason like CONCAT('%',#{keyWords},'%')  
+			</if>
+			<if test="description  != null">
+				AND description = #{description ,jdbcType=VARCHAR}
+			</if>
+			<if test="processId  != null">
+				AND process_id = #{processId ,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+</mapper>

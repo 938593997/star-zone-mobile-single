@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><link rel="stylesheet" href="/umi.css"><meta charset="utf-8"><meta name="theme-color" content="#000000"><title>star-zone</title><!-- set `maximum-scale` for some compatibility issues --><!-- 强制显示方式 --><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui"><!-- 允许全屏 --><meta name="apple-mobile-web-app-capable" content="yes"><!-- 顶端状态条样式 --><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><!-- 忽略将数字变为电话号码 --><meta content="telephone=no" name="format-detection"><!-- uc强制竖屏 --><meta name="screen-orientation" content="portrait"><!-- qq强制竖屏 --><meta name="x5-orientation" content="portrait"><!-- uc强制全屏 --><meta name="full-screen" content="yes"><!-- qq强制全屏 --><meta name="x5-fullscreen" content="true"><!-- uc应用模式 --><meta name="browsermode" content="application"><!-- qq应用模式 --><meta name="x5-page-mode" content="app"><!-- windows phone 点击无高光 --><meta name="msapplication-tap-highlight" content="no"><script>var winWidth = window.innerWidth;
+      var winHeight = window.innerHeight;
+      var perRemPx = document.getElementsByTagName("html")[0].clientWidth / 7.5;
+
+      window.addEventListener("resize", function () {
+          perRemPx = document.getElementsByTagName("html")[0].clientWidth / 7.5;
+          document.getElementsByTagName("html")[0].style.fontSize = perRemPx + "px";
+      });
+      document.getElementsByTagName("html")[0].style.fontSize = perRemPx + "px";
+
+      // if ('addEventListener' in document) {
+      //   document.addEventListener('DOMContentLoaded', function() {
+      //     FastClick.attach(document.body);
+      //   }, false);
+      // }
+      if(!window.Promise) {
+        document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
+      }</script><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><script>window.routerBase = "/";</script></head><body><div id="root"></div><script src="/umi.js"></script></body></html>

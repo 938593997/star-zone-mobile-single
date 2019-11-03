@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starzone.dao.master.SzChooseforyouDao">
+	<resultMap id="BaseResultMap" type="com.starzone.pojo.SzChooseforyou">
+	<id column="id" jdbcType="VARCHAR" property="id" />
+	<id column="menuid" jdbcType="VARCHAR" property="menuid" />
+	<id column="userid" jdbcType="VARCHAR" property="userid" />
+	<id column="isdelete" jdbcType="VARCHAR" property="isdelete" />
+	<id column="name" jdbcType="VARCHAR" property="name" />
+	<id column="type" jdbcType="VARCHAR" property="type" />
+	<id column="create_time" jdbcType="VARCHAR" property="createTime" />
+	<id column="ext1" jdbcType="VARCHAR" property="ext1" />
+	<id column="ext2" jdbcType="VARCHAR" property="ext2" />
+	<id column="ext3" jdbcType="VARCHAR" property="ext3" />
+	<id column="ext4" jdbcType="VARCHAR" property="ext4" />
+	<id column="ext5" jdbcType="VARCHAR" property="ext5" />
+	</resultMap>
+	<sql id="BASE_COLUMN_LIST">
+	id, menuid, userid, isdelete, name, type, create_time, ext1, ext2, ext3, ext4, ext5
+	</sql>
+	<!-- 查询 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from sz_chooseforyou_new
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from sz_chooseforyou_new
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<!-- 选择添加 -->
+	<insert id="insertSelective" parameterType="com.starzone.pojo.SzChooseforyou">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into sz_chooseforyou_new
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="menuid != null">
+				menuid,
+			</if>
+			<if test="userid != null">
+				userid,
+			</if>
+			<if test="isdelete != null">
+				isdelete,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="ext1 != null">
+				ext1,
+			</if>
+			<if test="ext2 != null">
+				ext2,
+			</if>
+			<if test="ext3 != null">
+				ext3,
+			</if>
+			<if test="ext4 != null">
+				ext4,
+			</if>
+			<if test="ext5 != null">
+				ext5,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="menuid != null">
+				#{menuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="isdelete != null">
+				#{isdelete,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="ext1 != null">
+				#{ext1,jdbcType=VARCHAR},
+			</if>
+			<if test="ext2 != null">
+				#{ext2,jdbcType=VARCHAR},
+			</if>
+			<if test="ext3 != null">
+				#{ext3,jdbcType=VARCHAR},
+			</if>
+			<if test="ext4 != null">
+				#{ext4,jdbcType=VARCHAR},
+			</if>
+			<if test="ext5 != null">
+				#{ext5,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 选择修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.starzone.pojo.SzChooseforyou">
+		update sz_chooseforyou_new
+		<set>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="menuid != null">
+				menuid = #{menuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				userid = #{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="isdelete != null">
+				isdelete = #{isdelete,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="ext1 != null">
+				ext1 = #{ext1,jdbcType=VARCHAR},
+			</if>
+			<if test="ext2 != null">
+				ext2 = #{ext2,jdbcType=VARCHAR},
+			</if>
+			<if test="ext3 != null">
+				ext3 = #{ext3,jdbcType=VARCHAR},
+			</if>
+			<if test="ext4 != null">
+				ext4 = #{ext4,jdbcType=VARCHAR},
+			</if>
+			<if test="ext5 != null">
+				ext5 = #{ext5,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<!-- 组合条件查询 -->
+	<select id="querySzChooseforyouList" parameterType="com.starzone.pojo.SzChooseforyou"
+		resultMap="BaseResultMap">
+		<!-- select 
+		id, menuid, userid, isdelete, name, type, create_time, ext1, ext2, ext3, ext4, ext5 
+		from sz_chooseforyou_new -->
+		SELECT
+			c.id,
+			c.menuid,
+			c.userid,
+			c.isdelete,
+			c. NAME,
+			c.type,
+			c.create_time,
+			c.ext2,
+			c.ext3,
+			c.ext4,
+			c.ext5,
+			a.choose_id AS ext1
+		FROM
+			sz_chooseforyou_new c
+		LEFT JOIN (
+			SELECT
+				re.choose_id
+			FROM
+				sz_chooseforyouset re
+			GROUP BY
+				re.choose_id
+			HAVING
+				COUNT(re.choose_id) > 0
+		) a ON c.id = a.choose_id where 1=1 
+		<!-- <where> -->
+			<if test="id != null">
+				AND id = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="menuid  != null">
+				AND menuid = #{menuid ,jdbcType=VARCHAR}
+			</if>
+			<if test="userid  != null">
+				AND userid = #{userid ,jdbcType=VARCHAR}
+			</if>
+			<if test="isdelete  != null">
+				AND isdelete = #{isdelete ,jdbcType=VARCHAR}
+			</if>
+			<if test="name  != null and name != '' " >
+				AND name like CONCAT('%',#{name},'%')  
+			</if>
+			<if test="type  != null">
+				AND type = #{type ,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime  != null">
+				AND create_time = #{createTime ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext1  != null">
+				AND ext1 = #{ext1 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext2  != null">
+				AND ext2 = #{ext2 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext3  != null">
+				AND ext3 = #{ext3 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext4  != null">
+				AND ext4 = #{ext4 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext5  != null">
+				AND ext5 = #{ext5 ,jdbcType=VARCHAR}
+			</if>
+		<!-- </where> -->
+		    order by create_time DESC
+	</select>
+</mapper>

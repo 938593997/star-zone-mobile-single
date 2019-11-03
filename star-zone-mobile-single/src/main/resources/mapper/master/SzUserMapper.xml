@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starzone.dao.master.SzUserDao">
+	<resultMap id="BaseResultMap" type="com.starzone.pojo.SzUser">
+	<id column="id" jdbcType="VARCHAR" property="id" />
+	<id column="name" jdbcType="VARCHAR" property="name" />
+	<id column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+	<id column="sex" jdbcType="VARCHAR" property="sex" />
+	<id column="password" jdbcType="VARCHAR" property="password" />
+	<id column="des" jdbcType="VARCHAR" property="des" />
+	<id column="birthday" jdbcType="VARCHAR" property="birthday" />
+	<id column="regist_date" jdbcType="VARCHAR" property="registDate" />
+	<id column="last_login" jdbcType="VARCHAR" property="lastLogin" />
+	<id column="ip" jdbcType="VARCHAR" property="ip" />
+	<id column="status" jdbcType="VARCHAR" property="status" />
+	<id column="use_sz_date" jdbcType="VARCHAR" property="useSzDate" />
+	<id column="role" jdbcType="VARCHAR" property="role" />
+	<id column="ext1" jdbcType="VARCHAR" property="ext1" />
+	<id column="ext2" jdbcType="VARCHAR" property="ext2" />
+	<id column="ext3" jdbcType="VARCHAR" property="ext3" />
+	<id column="ext4" jdbcType="VARCHAR" property="ext4" />
+	<id column="ext5" jdbcType="VARCHAR" property="ext5" />
+	</resultMap>
+	<sql id="BASE_COLUMN_LIST">
+	id, name, pic_url, sex, password, des, birthday, regist_date, last_login, ip, status, use_sz_date, role, ext1, ext2, ext3, ext4, ext5
+	</sql>
+	<!-- 查询 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from sz_user
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from sz_user
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<!-- 选择添加 -->
+	<insert id="insertSelective" parameterType="com.starzone.pojo.SzUser">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into sz_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="picUrl != null">
+				pic_url,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="des != null">
+				des,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="registDate != null">
+				regist_date,
+			</if>
+			<if test="lastLogin != null">
+				last_login,
+			</if>
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="useSzDate != null">
+				use_sz_date,
+			</if>
+			<if test="role != null">
+				role,
+			</if>
+			<if test="ext1 != null">
+				ext1,
+			</if>
+			<if test="ext2 != null">
+				ext2,
+			</if>
+			<if test="ext3 != null">
+				ext3,
+			</if>
+			<if test="ext4 != null">
+				ext4,
+			</if>
+			<if test="ext5 != null">
+				ext5,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="picUrl != null">
+				#{picUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="des != null">
+				#{des,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				#{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="registDate != null">
+				#{registDate,jdbcType=VARCHAR},
+			</if>
+			<if test="lastLogin != null">
+				#{lastLogin,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="useSzDate != null">
+				#{useSzDate,jdbcType=VARCHAR},
+			</if>
+			<if test="role != null">
+				#{role,jdbcType=VARCHAR},
+			</if>
+			<if test="ext1 != null">
+				#{ext1,jdbcType=VARCHAR},
+			</if>
+			<if test="ext2 != null">
+				#{ext2,jdbcType=VARCHAR},
+			</if>
+			<if test="ext3 != null">
+				#{ext3,jdbcType=VARCHAR},
+			</if>
+			<if test="ext4 != null">
+				#{ext4,jdbcType=VARCHAR},
+			</if>
+			<if test="ext5 != null">
+				#{ext5,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 选择修改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.starzone.pojo.SzUser">
+		update sz_user
+		<set>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="picUrl != null">
+				pic_url = #{picUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="des != null">
+				des = #{des,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="registDate != null">
+				regist_date = #{registDate,jdbcType=VARCHAR},
+			</if>
+			<if test="lastLogin != null">
+				last_login = #{lastLogin,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				ip = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="useSzDate != null">
+				use_sz_date = #{useSzDate,jdbcType=VARCHAR},
+			</if>
+			<if test="role != null">
+				role = #{role,jdbcType=VARCHAR},
+			</if>
+			<if test="ext1 != null">
+				ext1 = #{ext1,jdbcType=VARCHAR},
+			</if>
+			<if test="ext2 != null">
+				ext2 = #{ext2,jdbcType=VARCHAR},
+			</if>
+			<if test="ext3 != null">
+				ext3 = #{ext3,jdbcType=VARCHAR},
+			</if>
+			<if test="ext4 != null">
+				ext4 = #{ext4,jdbcType=VARCHAR},
+			</if>
+			<if test="ext5 != null">
+				ext5 = #{ext5,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<!-- 组合条件查询 -->
+	<select id="querySzUserList" parameterType="com.starzone.pojo.SzUser"
+		resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from sz_user
+		<where>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="name  != null">
+				AND name = #{name ,jdbcType=VARCHAR}
+			</if>
+			<if test="picUrl  != null">
+				AND pic_url = #{picUrl ,jdbcType=VARCHAR}
+			</if>
+			<if test="sex  != null">
+				AND sex = #{sex ,jdbcType=VARCHAR}
+			</if>
+			<if test="password  != null">
+				AND password = #{password ,jdbcType=VARCHAR}
+			</if>
+			<if test="des  != null">
+				AND des = #{des ,jdbcType=VARCHAR}
+			</if>
+			<if test="birthday  != null">
+				AND birthday = #{birthday ,jdbcType=VARCHAR}
+			</if>
+			<if test="registDate  != null">
+				AND regist_date = #{registDate ,jdbcType=VARCHAR}
+			</if>
+			<if test="lastLogin  != null">
+				AND last_login = #{lastLogin ,jdbcType=VARCHAR}
+			</if>
+			<if test="ip  != null">
+				AND ip = #{ip ,jdbcType=VARCHAR}
+			</if>
+			<if test="status  != null">
+				AND status = #{status ,jdbcType=VARCHAR}
+			</if>
+			<if test="useSzDate  != null">
+				AND use_sz_date = #{useSzDate ,jdbcType=VARCHAR}
+			</if>
+			<if test="role  != null">
+				AND role = #{role ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext1  != null">
+				AND ext1 = #{ext1 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext2  != null">
+				AND ext2 = #{ext2 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext3  != null">
+				AND ext3 = #{ext3 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext4  != null">
+				AND ext4 = #{ext4 ,jdbcType=VARCHAR}
+			</if>
+			<if test="ext5  != null">
+				AND ext5 = #{ext5 ,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 通过加密后的name查询 -->
+	<select id="CheckName" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from sz_user
+		where 1 = 1 and name = #{name, jdbcType=VARCHAR}
+	</select>
+	<!-- 用户登入查询 -->
+	<select id="loginCheck" parameterType="com.starzone.pojo.SzUser" resultMap="BaseResultMap">
+		select
+		<include refid="BASE_COLUMN_LIST" />
+		from sz_user
+		where 1 = 1 and name = #{name, jdbcType=VARCHAR}
+		      and password = #{password, jdbcType=VARCHAR}
+		      and des = #{des ,jdbcType=VARCHAR}
+	</select>
+</mapper>
