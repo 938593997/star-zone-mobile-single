@@ -132,7 +132,9 @@ function proxyRequest(url, options, showError = true) {
     console.log(e,'errrr')
     const status = e.code;
       if (status === undefined) {
-        router.push('/login');
+        window.g_app._store.dispatch({
+          type: 'login/logout',
+        })
         return;
       }
       if (status === 401) {

@@ -13,6 +13,9 @@ export default {
         localStorage.setItem('USER_INFO', JSON.stringify(response.data))
         localStorage.setItem('recovery-buss-web-token', response.data.id) // 设置token用户表id作为token
         router.push('/class')
+        if (callback && typeof callback === 'function') { // callback用法
+          callback(response); // 返回结果
+        }
       } else if (response && response.code === 1 && response.message === '失败') {
         Toast.fail('秘钥或密码错误', 3);
         return false
@@ -74,5 +77,8 @@ export default {
         ...req,
       }
     },
+    saveData (state, action) {
+      return Object.assign({ ...state }, action.payload)
+    }
   },
 };

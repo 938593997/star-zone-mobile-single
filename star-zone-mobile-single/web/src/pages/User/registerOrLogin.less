@@ -4,6 +4,18 @@ img { border: none;}
 .green { color: #00a3d2 !important;}
 .rzTitle { font-size: .5rem; line-height: .5rem; margin-bottom: .1rem;text-align: center;color: #00a3d2 !important;}
 
+.loadingStyle {
+  :global{
+    .am-activity-indicator {
+      display: inline;
+      margin-right: 8px;
+    }
+    .am-activity-indicator-spinner {
+      width: 20px;
+      height: 10px;
+    }
+  }
+}
 :global{
   .login-bg {
   min-height: 100%;

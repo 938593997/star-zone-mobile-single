@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
 import { CSSTransition } from 'react-transition-group'
-import { SearchBar, Modal, Menu, Toast, View } from 'antd-mobile'
+import { SearchBar, Modal, Menu, Toast, View, ActivityIndicator } from 'antd-mobile'
 import ExportJsonExcel from 'js-export-excel'
 import classNames from 'classnames'
 import router from 'umi/router'
@@ -22,6 +22,8 @@ class registerOrLoginPage extends Component {
       passwordKey: '', // 秘钥
       passwordKeyError: false, // 密钥错误
       visible: false, // 协议弹窗
+
+      logining: false, // 登入中
     }
   }
   componentDidMount() {
@@ -55,7 +57,16 @@ class registerOrLoginPage extends Component {
       Toast.fail('请输入密码', 3);
       return false
     }
-    dispatch({ type: 'user/login', payload: { name, des: passwordKey, password } })
+    this.setState({ logining: true })
+    dispatch({
+      type: 'user/login',
+      payload: { name, des: passwordKey, password },
+      callback: (res) => {
+        if (res) {
+          this.setState({ logining: false })
+        }
+      }
+    })
   }
 
   register = () => { // 用户注册
@@ -81,6 +92,7 @@ class registerOrLoginPage extends Component {
       callback: (res) => {
         if (res) { // 注册成功后，清空输入的注册信息
           this.setState({ name: '', password: '', passwordKey: '' })
+          dispatch({ type: 'user/save', payload: { actions: undefined } })
         }
       }
     })
@@ -146,7 +158,7 @@ class registerOrLoginPage extends Component {
 
   render() {
     const { user: { datas, actions } } = this.props
-    const { visible, nameIsFocus, name, nameError, passwordIsFocus, password, passwordError, passwordKeyIsFocus, passwordKey, passwordKeyError } = this.state
+    const { visible, nameIsFocus, name, nameError, passwordIsFocus, password, passwordError, passwordKeyIsFocus, passwordKey, passwordKeyError, logining } = this.state
     const info = '本系统是一个基于个人信息管理而开发的。系统的的登入需要三个要素，分别是用户名、秘钥及密码，用户可以在系统首页输入用户名、秘钥，系统会根据用户输入的信息去验证当前用户是登入还是注册。注册成功时需要再次输入登入系统。'
     return (
       <div style={{ paddingTop: 48 }}>
@@ -267,7 +279,7 @@ class registerOrLoginPage extends Component {
           <div className="login-wrap">
             {/* <div hidden={actions === 'login' ? false : true} className="login" onClick={this.login}>登入</div>
             <div hidden={actions === 'register' ? false : true} className="login" onClick={this.register}>注册</div> */}
-            <div disabled={actions === 'login' ? false : true} className="login" onClick={actions === 'login' ? this.login : (actions === 'register' ? this.register : this.showRegisterOrLogin)}>{actions === 'login' ? '登入' : (actions === 'register' ? '注册' : '登入/注册')}</div>
+            <div disabled={actions === 'login' ? false : true} className="login" onClick={actions === 'login' ? this.login : (actions === 'register' ? this.register : this.showRegisterOrLogin)}>{actions === 'login' ? (logining ? <div style={{ display: 'inline'}}><div className={styles.loadingStyle} style={{ display: 'inline' }}><ActivityIndicator /></div><div style={{ display: 'inline'}}>登入中...</div></div> : '登入') : (actions === 'register' ? '注册' : '登入/注册')}</div>
             {/* <div disabled={actions === 'register' ? false : true} className="login" onClick={this.register}>注册</div> */}
           </div>
           <p className="agree-wrap" onClick={(e) => {

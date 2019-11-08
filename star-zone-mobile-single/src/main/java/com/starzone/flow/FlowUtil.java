@@ -204,20 +204,22 @@ public class FlowUtil {
 	 */
 	public Map<String, Object> findUserTaskList(String userId){
 		log.info("开始查询用户流程（通过用户id）userId：" + userId);
-	    List<Task> taskList = taskService.createTaskQuery().taskAssignee(userId).list();
-	    List<ActivitiNode> resultList = new ArrayList<ActivitiNode>();
-	    if(!CollectionUtils.isEmpty(taskList)){
-	        for(Task task : taskList){
-	        	ActivitiNode an = new ActivitiNode();
-	        	List<Comment> commomentList = taskService.getProcessInstanceComments(task.getProcessInstanceId()); // TODO
-	        	an.setTaskId(task.getId());
-	            an.setTaskName(task.getName());
-	            an.setUserId(task.getAssignee());
-	            an.setProcessId(task.getProcessInstanceId());
-	            an.setDesc(!CollectionUtils.isEmpty(commomentList) ? commomentList.get(0).getFullMessage() : null);
-	            resultList.add(an);
-	        }
-	    }
+		List<ActivitiNode> resultList = new ArrayList<ActivitiNode>();
+		if (null != userId && !"".equals(userId)) {
+			List<Task> taskList = taskService.createTaskQuery().taskAssignee(userId).list();
+			if(!CollectionUtils.isEmpty(taskList)){
+				for(Task task : taskList){
+					ActivitiNode an = new ActivitiNode();
+					List<Comment> commomentList = taskService.getProcessInstanceComments(task.getProcessInstanceId()); // TODO
+					an.setTaskId(task.getId());
+					an.setTaskName(task.getName());
+					an.setUserId(task.getAssignee());
+					an.setProcessId(task.getProcessInstanceId());
+					an.setDesc(!CollectionUtils.isEmpty(commomentList) ? commomentList.get(0).getFullMessage() : null);
+					resultList.add(an);
+				}
+			}
+		}
 	    Map<String, Object> resultMap = ResultMapHelper.getSuccessMap();
 	    resultMap.put("userTaskList", resultList);
 	    log.info("查询用户流程（通过用户id）结束, userTaskList=" + resultList.toString());
@@ -231,27 +233,29 @@ public class FlowUtil {
 	 */
 	public Map<String, Object> findUserTaskByPage(Integer pageNum, Integer pageSize, String userId, String bpmnName, String submitNodeName){
 		log.info("分页开始查询用户待审批流程（通过用户id）userId：" + userId);
-		PageHelper.startPage(pageNum, pageSize); // 设置分页信息
-	    List<Task> taskRejectedList = taskService.createTaskQuery().taskAssignee(userId).list(); // 被退回的
-		List<Task> taskList = taskService.createTaskQuery().taskCandidateUser(userId).processDefinitionKey(bpmnName).list();
-		if (null != taskRejectedList && taskRejectedList.size() > 0) { // 将驳回的任务一起加进去，构造带审批任务
-			taskList.addAll(taskRejectedList);
+		List<ActivitiNode> resultList = new ArrayList<ActivitiNode>();
+		if (null != userId && !"".equals(userId)) {
+			PageHelper.startPage(pageNum, pageSize); // 设置分页信息
+			List<Task> taskRejectedList = taskService.createTaskQuery().taskAssignee(userId).list(); // 被退回的
+			List<Task> taskList = taskService.createTaskQuery().taskCandidateUser(userId).processDefinitionKey(bpmnName).list();
+			if (null != taskRejectedList && taskRejectedList.size() > 0) { // 将驳回的任务一起加进去，构造带审批任务
+				taskList.addAll(taskRejectedList);
+			}
+			if(!CollectionUtils.isEmpty(taskList)){
+				for(Task task : taskList){
+					ActivitiNode an = new ActivitiNode();
+//	        	    List<Comment> commomentList = taskService.getProcessInstanceComments(task.getProcessInstanceId()); // TODO
+					an.setTaskId(task.getId());
+					an.setTaskName(task.getName());
+					an.setUserId(task.getAssignee());
+					an.setProcessId(task.getProcessInstanceId());
+					an.setCreateTime(new SimpleDateFormat("yyyy-MM-dd").format(task.getCreateTime()));
+					an.setIsReject(submitNodeName.equals(task.getName()) ? true : false);
+//	                an.setDesc(!CollectionUtils.isEmpty(commomentList) ? commomentList.get(0).getFullMessage() : null);
+					resultList.add(an);
+				}
+			}
 		}
-	    List<ActivitiNode> resultList = new ArrayList<ActivitiNode>();
-	    if(!CollectionUtils.isEmpty(taskList)){
-	        for(Task task : taskList){
-	        	ActivitiNode an = new ActivitiNode();
-//	        	List<Comment> commomentList = taskService.getProcessInstanceComments(task.getProcessInstanceId()); // TODO
-	        	an.setTaskId(task.getId());
-	            an.setTaskName(task.getName());
-	            an.setUserId(task.getAssignee());
-	            an.setProcessId(task.getProcessInstanceId());
-	            an.setCreateTime(new SimpleDateFormat("yyyy-MM-dd").format(task.getCreateTime()));
-	            an.setIsReject(submitNodeName.equals(task.getName()) ? true : false);
-//	            an.setDesc(!CollectionUtils.isEmpty(commomentList) ? commomentList.get(0).getFullMessage() : null);
-	            resultList.add(an);
-	        }
-	    }
 	    PageInfo<ActivitiNode> pageInfo = new PageInfo<ActivitiNode>(resultList);
 	    Map<String, Object> resultMap = ResultMapHelper.getSuccessMap();
 	    resultMap.put("userTaskPageInfo", pageInfo);
@@ -437,7 +441,8 @@ public class FlowUtil {
             highLightedActivitis.add(activityId);  
         }  
         //配置字体
-        InputStream imageStream = diagramGenerator.generateDiagram(bpmnModel, "png", highLightedActivitis, highLightedFlows,"宋体","微软雅黑","黑体",null,2.0);
+//        InputStream imageStream = diagramGenerator.generateDiagram(bpmnModel, "png", highLightedActivitis, highLightedFlows,"宋体","微软雅黑","黑体",null,2.0);
+        InputStream imageStream = diagramGenerator.generateDiagram(bpmnModel, "png", highLightedActivitis, highLightedFlows,"宋体","宋体","宋体",null,2.0);
         BufferedImage bi = ImageIO.read(imageStream);
         
         String imgPath = "";

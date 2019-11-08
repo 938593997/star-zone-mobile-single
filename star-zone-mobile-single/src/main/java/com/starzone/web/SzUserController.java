@@ -154,6 +154,7 @@ public class SzUserController {
 		JsonResult<SzUser> result = new JsonResult<SzUser>();
 		try {
 			String desfir = "";
+			szUser.setExt3(szUser.getName());
 			desfir = szUser.getDes();
 			szUser.setDes(DesUtil.encryptString(desfir, desfir));
 			szUser.setName(DesUtil.encryptString(desfir, szUser.getName()));
