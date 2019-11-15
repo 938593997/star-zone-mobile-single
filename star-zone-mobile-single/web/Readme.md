@@ -12,7 +12,8 @@
    #上拉加载更多下拉刷新
    <!-- npm install react-pull-to-refresh
    npm install reactjs-iscroll --save -->
-
+   #用Zmage实现图片点击放大 npm install react-zmage
+   https://blog.csdn.net/Wcharles666/article/details/90262525 -S
    npm install --save react-pullload
    #图片处理：图片处理的 React 组件。支持压缩、裁剪、加水印、滤镜、获取主色调等功能 https://go.ctolib.com/article/wiki/93744
    npm install react-image-process --save

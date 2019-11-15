@@ -24,6 +24,9 @@ const codeMessage = {
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
+    if (!response.data) {
+      response.data = null
+    }
     return response;
   }
   const errorText = codeMessage[response.status] || response.statusText;

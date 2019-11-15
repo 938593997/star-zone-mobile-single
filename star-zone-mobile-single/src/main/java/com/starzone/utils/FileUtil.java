@@ -3,6 +3,9 @@ package com.starzone.utils;
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 文件操作工具类
  * @doc 说明 1.文件夹是否存在，不存在先创建 2.文件是否存在，不存在，则创建
@@ -13,6 +16,8 @@ import java.io.IOException;
  * @history 1.0.0.0 2019年9月28日 下午1:32:15 created by【qiu_hf】
  */
 public class FileUtil {
+	
+	public static final Logger log = LoggerFactory.getLogger(FileUtil.class);
 
 	/**
 	 * 判断文件是否存在
@@ -25,11 +30,11 @@ public class FileUtil {
     public static void judeFileExists(File file) throws IOException {
 
         if (file.exists()) {
-            System.out.println("file exists");
+            log.info("file exists, delete and create a new one.");
             file.delete();
             file.createNewFile();
         } else {
-            System.out.println("file not exists, create it ...");
+            log.info("file not exists, create it ...");
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -51,12 +56,12 @@ public class FileUtil {
 
         if (file.exists()) {
             if (file.isDirectory()) {
-                System.out.println("dir exists");
+                log.info("dir exists");
             } else {
-                System.out.println("the same name file exists, can not create dir");
+                log.info("the same name file exists, can not create dir");
             }
         } else {
-            System.out.println("dir not exists, create it ...");
+            log.info("dir not exists, create it ...");
             file.mkdir();
         }
 

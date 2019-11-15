@@ -255,6 +255,19 @@
                     <executable>true</executable>
                     <includeSystemScope>true</includeSystemScope><!-- 将上面指定的本地包打进去 -->
                     <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                    
+                    <!-- <layout>ZIP</layout>
+                    <includes>
+                        <include>
+                            <groupId>1.0.0</groupId>
+                            <artifactId>star-zone-mobile-single</artifactId>
+                        </include>
+                         <include>
+                            <groupId>自己项目组</groupId>
+                            <artifactId>项目名</artifactId>
+                        </include>
+                    </includes> -->
+                    
                 </configuration>
                 <executions>
                     <execution>

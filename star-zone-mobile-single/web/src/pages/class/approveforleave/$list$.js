@@ -484,6 +484,7 @@ class ApproveForLeaveListPage extends Component {
                             extra={<span>审批节点：{item && item.taskName ? item.taskName : null}</span>}
                           />
                           <Card.Body>
+                            <div>申请情况：{item && item.desc ? item.desc : ''}</div>
                             <div>处理状态：{item && item.deleteReason ? item.deleteReason : ''}</div>
                             <div>处理人：{item && item.userId ? item.userId : ''}</div>
                             <div>处理时间：{item && item.endTime ? item.endTime : ''}</div>

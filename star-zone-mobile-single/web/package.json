@@ -52,6 +52,7 @@
     "react-motion": "^0.5.2",
     "react-pullload": "^1.2.0",
     "react-sticky": "^6.0.3",
-    "react-transition-group": "^2.5.0"
+    "react-transition-group": "^2.5.0",
+    "react-zmage": "^0.8.5"
   }
 }

@@ -3,6 +3,7 @@ import { Toast, Modal, List, InputItem, Radio, Flex, DatePicker, ImagePicker } f
 import DatePickers from 'react-mobile-datepicker'
 import { CSSTransition } from 'react-transition-group'
 import lrz from 'lrz'
+import Zmage from 'react-zmage'
 // import ReactImageProcess from "react-image-process"
 import { connect } from 'dva'
 import moment from 'moment'
@@ -114,7 +115,8 @@ class NameCard extends React.Component {
   changeImageSelect = (files, type, index) => { // 选择头像
     const { dispatch } = this.props
     if (type==='add') {
-      lrz(files[0].url, { quality: 0.1, width: 800 })
+      // lrz(files[0].url, { quality: 0.1, width: 800 })
+      lrz(files[0].url, { quality: 0.6, width: 800 })
       .then((rst)=>{
         // 处理成功会执行
         this.setState({ imagesrc: rst.base64 })
@@ -160,7 +162,8 @@ class NameCard extends React.Component {
           footer={[{ text: '关闭', onPress: () => { this.onClose('isShowPersonalInfo')() } }, { text: '去修改', onPress: () => { this.showPage('isShowModifyPage')() } }]}
         >
           <div>
-            <img src={avatar} style={{ width: '1rem', height: '1rem', border: 1, borderRadius: '2rem', background: '#fff', }} alt="" />
+            {/* <img src={avatar} style={{ width: '1rem', height: '1rem', border: 1, borderRadius: '2rem', background: '#fff', }} alt="" /> */}
+            <Zmage src={avatar} style={{ width: '1rem', height: '1rem', border: 1, borderRadius: '2rem', background: '#fff', }} alt="" />
             <List renderHeader={() => '个人信息'}>
           <InputItem
             {...getFieldProps('nameShow', {
@@ -225,7 +228,8 @@ class NameCard extends React.Component {
           footer={[{ text: '关闭', onPress: () => { this.onClose('isShowModifyPage')() } }, { text: '保存', onPress: () => this.savePersonalInfo() }]}
         >
           <div>
-            <img src={avatar} style={{ width: '1rem', height: '1rem', border: 1, borderRadius: '2rem', background: '#fff' }} alt="" />
+            {/* <img src={avatar} style={{ width: '1rem', height: '1rem', border: 1, borderRadius: '2rem', background: '#fff' }} alt="" /> */}
+            <Zmage src={avatar} style={{ width: '1rem', height: '1rem', border: 1, borderRadius: '2rem', background: '#fff', }} alt="" />
             <List renderHeader={() => <div>修改个人信息</div>}>
 
             <Flex style={{ padding: '15px' }}>

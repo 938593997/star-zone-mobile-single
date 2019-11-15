@@ -8,6 +8,7 @@ package com.starzone.web;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +64,7 @@ public class ApplyForLeaveController {
 	public ApplyForLeaveService applyForLeaveServiceImpl;
 	
 	@Autowired
-	FlowUtil flowUtil;
+	private FlowUtil flowUtil;
 	
 	@Autowired
 	private RedisUtil redisUtil;
@@ -416,6 +417,16 @@ public class ApplyForLeaveController {
 					classMap.put("list", ActivitiNode.class); // list中的数据对应的javaBean是ActivitiNode
 					JSONObject jsonObject = JSONObject.fromObject(pInfo);
 					PageInfo<ActivitiNode> pageInfos = (PageInfo<ActivitiNode>)JSONObject.toBean(jsonObject, PageInfo.class, classMap);
+					List<ActivitiNode> anList = pageInfos.getList();
+					List<ActivitiNode> listApplyForLeave = new ArrayList<ActivitiNode>();
+					if (null != anList && anList.size() > 0) {
+						anList.forEach((item) -> {
+							ApplyForLeave afl = applyForLeaveServiceImpl.queryApplyInfoByProcessId(item.getProcessId());
+							item.setDesc(null != afl ? afl.getUserId() + "-因为 " + afl.getApplyReason() + "-申请请" + afl.getApplyDate() + "天假" : null);
+							listApplyForLeave.add(item);
+						});
+					}
+					pageInfos.setList(listApplyForLeave);
 					result.setData(pageInfos);
 				}
 			}

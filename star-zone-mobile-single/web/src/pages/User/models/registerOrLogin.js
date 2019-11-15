@@ -18,11 +18,17 @@ export default {
         }
       } else if (response && response.code === 1 && response.message === '失败') {
         Toast.fail('秘钥或密码错误', 3);
-        return false
+        if (callback && typeof callback === 'function') { // callback用法
+          callback(response); // 返回结果
+        }
+        // return false
       } else {
         console.info(response)
+        if (callback && typeof callback === 'function') { // callback用法
+          callback(response); // 返回结果
+        }
         Toast.fail('登入失败，请稍后再试', 3);
-        return false
+        // return false
       }
     },
     * showRegisterOrLogin({ payload, callback }, { call, put }) {
@@ -42,13 +48,13 @@ export default {
                 callback(response); // 返回结果
               }
               // window.location.reload()
-              Toast.success('注册成功，请登入', 3)
+              Toast.success('注册成功，请登入', 2)
             } else {
-              Toast.fail('注册失败，请稍后再试', 3);
+              Toast.fail('注册失败，请稍后再试', 2);
               return false
             }
         } else {
-          Toast.fail('该用户名已被注册', 3);
+          Toast.fail('该用户名已被注册', 2);
         }
       }
     },
