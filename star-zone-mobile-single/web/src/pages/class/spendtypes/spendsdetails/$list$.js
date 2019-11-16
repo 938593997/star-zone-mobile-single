@@ -22,7 +22,7 @@ const goOutChooseList = [{value: 1, label: '共享单车'}, {value: 2, label: '�
 const houseTypeChooseList = [{value: 1, label: '民房'}, {value: 2, label: '小区套房'}, {value: 3, label: '其他'}]
 const relationShipChooseList = [{value: 1, label: '出钱'}, {value: 2, label: '收钱'}]
 
-const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent)
 let moneyKeyboardWrapProps
 if (isIPhone) {
   moneyKeyboardWrapProps = {
@@ -135,13 +135,13 @@ class SpendDetailListPage extends Component {
   }
 
   toggleBody = (isPin) => { // 防止底层滚动
-    let body = document.body;
-    let top = body.scrollTop;
+    let body = document.body
+    let top = body.scrollTop
     if(isPin){
-      body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + top + 'px; left: 0; overflow: hidden;';
+      body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + top + 'px; left: 0; overflow: hidden;'
     } else {
-      body.removeAttribute('style');
-      body.scrollTop = top;
+      body.removeAttribute('style')
+      body.scrollTop = top
     }
   }
 

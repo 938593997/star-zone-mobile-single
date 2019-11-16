@@ -33,12 +33,12 @@ class registerOrLoginPage extends Component {
   }
 
   showProtocol() { // 协议弹窗
-    this.setState({ visible: true });
+    this.setState({ visible: true })
     this.toggleBody(1)
   }
 
   onClose = key => () => {
-    this.setState({ [key]: false, });
+    this.setState({ [key]: false })
     this.toggleBody(0)
   }
 
@@ -46,15 +46,15 @@ class registerOrLoginPage extends Component {
     const { name, passwordKey, password } = this.state
     const { dispatch } = this.props
     if (passwordKey.length < 9) {
-      Toast.fail('秘钥长度不能小于9位', 3);
+      Toast.fail('秘钥长度不能小于9位', 3)
       return false
     }
     if (name.length === 0) {
-      Toast.fail('请输入用户名', 3);
+      Toast.fail('请输入用户名', 3)
       return false
     }
     if (password.length === 0) {
-      Toast.fail('请输入密码', 3);
+      Toast.fail('请输入密码', 3)
       return false
     }
     this.setState({ logining: true })
@@ -73,15 +73,15 @@ class registerOrLoginPage extends Component {
     const { name, passwordKey, password } = this.state
     const { dispatch } = this.props
     if (passwordKey.length < 9) {
-      Toast.fail('秘钥长度不能小于9位', 3);
+      Toast.fail('秘钥长度不能小于9位', 3)
       return false
     }
     if (name.length === 0) {
-      Toast.fail('请输入用户名', 3);
+      Toast.fail('请输入用户名', 3)
       return false
     }
     if (password.length === 0) {
-      Toast.fail('请输入密码', 3);
+      Toast.fail('请输入密码', 3)
       return false
     }
     dispatch({
@@ -102,11 +102,11 @@ class registerOrLoginPage extends Component {
     const { name, passwordKey } = this.state
     const { dispatch } = this.props
     if (name.length === 0) {
-      Toast.fail('请输入用户名', 3);
+      Toast.fail('请输入用户名', 3)
       return false
     }
     if (passwordKey.length < 9) {
-      Toast.fail('秘钥长度不能小于9位', 3);
+      Toast.fail('秘钥长度不能小于9位', 3)
       return false
     }
     dispatch({ type: 'user/showRegisterOrLogin', payload: { name, des: passwordKey } })
@@ -117,20 +117,20 @@ class registerOrLoginPage extends Component {
   }
 
   toggleBody = (isPin) => {
-    let body = document.body;
-    let top = body.scrollTop;
+    let body = document.body
+    let top = body.scrollTop
     if(isPin){
-      body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + top + 'px; left: 0; overflow: hidden;';
+      body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + top + 'px; left: 0; overflow: hidden;'
     } else {
-      body.removeAttribute('style');
-      body.scrollTop = top;
+      body.removeAttribute('style')
+      body.scrollTop = top
     }
   }
 
   downloadExcel = () => { // 模板下载
     const data = [{ name: '杭峰', taskContent: '开发' }]
-    var option={};
-    let dataTable = [];
+    var option={}
+    let dataTable = []
     if (data) {
       for (let i in data) {
         if(data){
@@ -138,7 +138,7 @@ class registerOrLoginPage extends Component {
             '姓名': data[i].name,
             '任务内容': data[i].taskContent,
           }
-          dataTable.push(obj);
+          dataTable.push(obj)
         }
       }
     }
@@ -152,8 +152,8 @@ class registerOrLoginPage extends Component {
       }
     ];
 
-    var toExcel = new ExportJsonExcel(option);
-    toExcel.saveExcel();
+    var toExcel = new ExportJsonExcel(option)
+    toExcel.saveExcel()
   }
 
   render() {

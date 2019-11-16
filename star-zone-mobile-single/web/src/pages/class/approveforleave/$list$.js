@@ -15,9 +15,11 @@ const nowTimeStamp = Date.now()
 const now = new Date(nowTimeStamp)
 const mainTabs = [{ title: '我的申请' }, { title: '我的审批' }, { title: '审批历史' }]
 function renderTabBar(props) {
-  return (<Sticky>
-    {({ style }) => <div style={{ ...style, zIndex: 1 }}><Tabs.DefaultTabBar {...props} page={3} /></div>}
-  </Sticky>)
+  return (
+    <Sticky>
+      {({ style }) => <div style={{ ...style, zIndex: 1 }}><Tabs.DefaultTabBar {...props} page={3} /></div>}
+    </Sticky>
+  )
 }
 
 @connect(({ approveforleave, loading }) => ({ approveforleave, loading: loading.models.approveforleave }))
@@ -165,7 +167,7 @@ class ApproveForLeaveListPage extends Component {
             action: STATS.reset,
             index: res.data.pages - 1, // 可刷新次数为总页数减一
             searchVal: val, // 过滤条件
-          });
+          })
         }, 1000)
       }
      })
@@ -185,7 +187,7 @@ class ApproveForLeaveListPage extends Component {
 
   onCloseMadeal = (key) => { // 隐藏弹框
     this.props.form.resetFields()
-    this.setState({ [key]: false, editData: null, imgFollowNginxUrl: null });
+    this.setState({ [key]: false, editData: null, imgFollowNginxUrl: null })
     this.toggleBody(0)
   }
 
@@ -231,13 +233,13 @@ class ApproveForLeaveListPage extends Component {
   }
 
   toggleBody = (isPin) => { // 防止底层滚动
-    let body = document.body;
-    let top = body.scrollTop;
+    let body = document.body
+    let top = body.scrollTop
     if(isPin){
-      body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + top + 'px; left: 0; overflow: hidden;';
+      body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + top + 'px; left: 0; overflow: hidden;'
     } else {
-      body.removeAttribute('style');
-      body.scrollTop = top;
+      body.removeAttribute('style')
+      body.scrollTop = top
     }
   }
 
@@ -277,7 +279,7 @@ class ApproveForLeaveListPage extends Component {
             action: STATS.reset,
             index: res.data.pages - 1, // 可刷新次数为总页数减一
             searchVal: val, // 过滤条件
-          });
+          })
         }, 1000)
       }
      })
@@ -374,7 +376,9 @@ class ApproveForLeaveListPage extends Component {
 
   render() {
     const { approveforleave: { PageInfo: { list } }, dispatch, form: { getFieldProps } } = this.props
-    const { isShowAddOrModifyTypePage, editData, hasMore, sDate, eDate, openTimeSelect_s, openTimeSelect_e, showFollow, imgFollowNginxUrl, isShowApplyPage, isShowResubmitPage, openTimeSelect_s_resubmit, openTimeSelect_e_resubmit, sDate_resubmit, eDate_resubmit } = this.state
+    const {
+      isShowAddOrModifyTypePage, editData, hasMore, sDate, eDate, openTimeSelect_s, openTimeSelect_e, showFollow, imgFollowNginxUrl, isShowApplyPage, isShowResubmitPage, openTimeSelect_s_resubmit, openTimeSelect_e_resubmit, sDate_resubmit, eDate_resubmit,
+    } = this.state
 
     return (
       <div className={styles.content_me} >
@@ -541,7 +545,7 @@ class ApproveForLeaveListPage extends Component {
 
               <InputItem
                   {...getFieldProps('startDate', {
-                      initialValue: sDate ? moment(sDate).format('YYYY-MM-DD') : null,
+                      initialValue: editData && editData.startDate ? editData.startDate : (sDate ? moment(sDate).format('YYYY-MM-DD') : null),
                     })
                   }
                   placeholder={'请选择'}
@@ -553,7 +557,7 @@ class ApproveForLeaveListPage extends Component {
 
                 <InputItem
                   {...getFieldProps('endDate', {
-                     initialValue: eDate ? moment(eDate).format('YYYY-MM-DD') : null,
+                     initialValue: editData && editData.endDate ? editData.endDate : (eDate ? moment(eDate).format('YYYY-MM-DD') : null),
                     })
                   }
                   placeholder={'请选择'}
